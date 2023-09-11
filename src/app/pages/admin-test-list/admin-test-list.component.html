@@ -1,0 +1,118 @@
+<div class="admin-course">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title"><i class="fa-solid fa-list"></i> Tests</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Title</th>
+                                        <th>Duration</th>
+                                        <th>Marks</th>
+                                        <th>Update</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of tests">
+                                        <td> {{item?.id}}</td>
+                                        <td> {{item?.title}}</td>
+                                        <td> {{item?.duration}}</td>
+                                        <td> {{item?.marks}}</td>
+                                        <td>
+                                            <button type="button" (click)="onUpdateClick(item)"
+                                                class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal"><i class="fa-solid fa-pen-to-square"></i></button>
+                                        </td>
+                                        
+                                        
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal start-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+
+        <form #addTestForm="ngForm" (ngSubmit)="onSubmit(addTestForm)" [noValidate]="false">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">Update Test Details</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        
+                        <div class="col-12 mt-3">
+                            <div class="form-group">
+                                <label for="testTitle"><b>Topic</b></label>
+                                <select class="form-control" ngModel name="title" required #title="ngModel" [(ngModel)]="selectedTest.title">
+                                    <option *ngFor="let title of titles" [value]="title">{{ title }}</option>
+                                </select>
+                                <div *ngIf="(title.dirty || title.touched) && title.errors?.['required']"
+                                    class="alert alert-danger">
+                                    Topic is required
+                                </div>  
+                            </div>
+                        </div>
+                        
+                        <div class="col-12 mt-3">
+                            <div class="form-group">
+                                <label for="courseDuration"><b>Duration</b></label>
+                        <select class="form-control" ngModel name="duration" required #duration="ngModel" [(ngModel)]="selectedTest.duration">
+                            <option *ngFor="let duration of durations" [value]="duration">{{ duration }}</option>
+                        </select>
+                        <div *ngIf="(duration.dirty || duration.touched) && duration.errors?.['required']"
+                            class="alert alert-danger">
+                            Duration is required
+                        </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 mt-3">
+                            <div class="form-group">
+                                <label for="testTitle"><b>Marks</b></label>
+                                <select class="form-control" ngModel name="marks" required #marks="ngModel" [(ngModel)]="selectedTest.marks">
+                                    <option *ngFor="let marks of markss" [value]="marks">{{ marks }}</option>
+                                </select>
+                                <div *ngIf="(marks.dirty || marks.touched) && marks.errors?.['required']"
+                                    class="alert alert-danger">
+                                    Marks is required
+                                </div>  
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        
+                        
+                        
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="closeModalBtn" class="btn btn-secondary"
+                        data-bs-dismiss="modal">Close</button>
+                    <button type="button" type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Modal END-->
+
+
+

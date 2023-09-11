@@ -1,0 +1,45 @@
+<div class="login-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title">Registered Students</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>User Name</th>
+                                        <th>Email</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Mobile Number</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of students">
+                                        <td>{{ item?.username }}</td>
+                                        <td>{{ item?.email }}</td>
+                                        <td>{{ item?.firstname }}</td>
+                                        <td>{{ item?.lastname }}</td>
+                                        <td>{{ item?.phone }}</td>
+                                        <td>
+                                            <button class="btn btn-danger btn-sm" type="button" (click)="onDelete(item.id)">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

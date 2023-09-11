@@ -1,0 +1,50 @@
+
+<div class="admin-course">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title"><i class="fa-solid fa-list"></i>Enrolled Courses</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Course Id</th>
+                                        <th>Course Code</th>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Instructor</th>
+                                        <th>Unenroll</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of courses">
+                                        <td>{{ item?.id }}</td>
+                                        <td>{{ item?.coursecode }}</td>
+                                        <td>{{ item?.title }}</td>
+                                        <td>{{ item?.description }}</td>
+                                        <td>{{ item?.instructorname }}</td>
+                                        <td>
+                                            <button class="btn btn-primary" type="button" (click)="Unenroll(item)"
+                                                
+                                                >Unenroll</button>
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="courses.length === 0">
+                                        <td colspan="7">No enrolled courses found.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

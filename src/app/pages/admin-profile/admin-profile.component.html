@@ -1,0 +1,112 @@
+<div class="register_page mt-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <h1>Admin Profile</h1>
+                    <hr>
+                    <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" [noValidate]="false">
+
+                        <div class="row">
+                            <div class="col-4 mt-3">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1"><i class="fa-solid fa-user"></i> Username</label>
+                                    <input type="text" class="form-control" disabled
+                                        [(ngModel)]="currentLoggedInUser.username" name="username">
+                                </div>
+                            </div>
+                            <div class="col-4 mt-3">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1"><i class="fa-solid fa-envelope"></i> Email
+                                        address</label>
+                                    <input type="email" class="form-control" disabled [(ngModel)]="currentLoggedInUser.email"
+                                        name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                        id="exampleInputEmail1" required aria-describedby="emailHelp">
+                                </div>
+                            </div>
+
+                            <div class="col-4 mt-3">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1"><i class="fa-solid fa-envelope"></i> First
+                                        Name</label>
+                                    <input type="text" class="form-control" disabled [(ngModel)]="currentLoggedInUser.firstname"
+                                        name="firstname" 
+                                        >
+                                </div>
+                            </div>
+
+                            <div class="col-4 mt-3">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1"><i class="fa-solid fa-envelope"></i> Last
+                                        Name</label>
+                                    <input type="text" class="form-control" disabled [(ngModel)]="currentLoggedInUser.lastname"
+                                        name="lastname" 
+                                        >
+                                </div>
+                            </div>
+
+                            <div class="col-4 mt-3">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1"><i class="fa-solid fa-phone"></i> Mobile
+                                        Number</label>
+                                    <input type="text" class="form-control"
+                                        [(ngModel)]="currentLoggedInUser.phone" name="phone"
+                                        #phone = 'ngModel'
+                                        pattern="^[6-9][0-9]{9}$"  required>
+                                </div>
+                                <div *ngIf="phone.invalid && (phone.dirty||phone.touched)">
+                                    <div *ngIf="phone.errors?.['required']" class="alert alert-danger">
+                                     Mobile Number is required
+ 
+                                    </div>
+                                    <div *ngIf="phone.errors?.['pattern']" class="alert alert-danger">
+                                        Please enter a valid 10-digit Indian mobile number starting with a digit between 6 and 9.
+                                    </div>
+ 
+                                 </div>
+                            </div>
+                            
+                            
+                           
+                            
+                            
+
+                            
+                           
+
+                            
+                           
+                            
+
+                            
+
+
+                            <div class="col-4 mt-3">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1"><i class="fa-solid fa-lock"></i> Password</label>
+                                    <input type="password" class="form-control"
+                                        [(ngModel)]="currentLoggedInUser.password" name="password" #password = 'ngModel'
+                                        id="exampleInputPassword1" required pattern ="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$">
+                                </div>
+                                <div *ngIf="password.invalid && (password.dirty||password.touched)">
+                                    <div *ngIf="password.errors?.['required']" class="alert alert-danger">
+                                     Password is required
+ 
+                                    </div>
+                                    <div *ngIf="password.errors?.['pattern']" class="alert alert-danger">
+                                        Please enter a valid password that is at least 8 characters long and contains at least one uppercase letter, one lowercase letter, one digit, and one special character
+ 
+                                    </div>
+ 
+                                 </div>
+
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-outline-primary mt-3">UPDATE</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

@@ -1,0 +1,173 @@
+
+
+    <div class="admin_course">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h1><i class="fa-solid fa-list"></i> Courses</h1>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Course Id</th>
+                                            <th>Course Code</th>
+                                            <th>Title</th>
+                                            <th>Description</th>
+                                            <th>Duration</th>
+                                            <th>Start Date</th>
+                                            <th>End Date</th>
+                                            <th>Instructor</th>
+                                            <th>Update</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of courses">
+                                            <td>{{item?.id}}</td>
+                                            <td>{{ item?.coursecode }}</td>
+                                            <td>{{ item?.title }}</td>
+                                            <td>{{ item?.description }}</td>
+                                            <td>{{ item?.duration }}</td>
+                                            <td>{{ item?.startDate }}</td>
+                                            <td>{{ item?.endDate }}</td>
+                                            <td>{{ item?.instructorname }}</td>
+                                            <td>
+                                                <button type="button" (click)="onUpdateClick(item)"
+                                                    class="btn btn-primary" data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal"><i class="fa-solid fa-pen-to-square"></i></button>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-danger btn-sm" type="button" (click)="onDelete(item.id)">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal start-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+
+            <form #addCourseForm="ngForm" (ngSubmit)="onSubmit(addCourseForm)" [noValidate]="false">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="exampleModalLabel">Update Course Details</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 mt-3">
+                                <div class="form-group">
+                                        <label for="courseCode"><b>Course Code</b></label>
+                                        <select class="form-control" ngModel name="coursecode" required #coursecode="ngModel" [(ngModel)]="selectedCourse.coursecode">
+                                            <option *ngFor="let coursecode of coursecodes" [value]="coursecode">{{ coursecode }}</option>
+                                        </select>
+                                        <div *ngIf="(coursecode.dirty || coursecode.touched) && coursecode.errors?.['required']"
+                                            class="alert alert-danger">
+                                            Course Code is required
+                                        </div>    
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <div class="form-group">
+                                    <label for="courseTitle"><b>Topic</b></label>
+                                    <select class="form-control" ngModel name="title" required #title="ngModel" [(ngModel)]="selectedCourse.title">
+                                        <option *ngFor="let title of titles" [value]="title">{{ title }}</option>
+                                    </select>
+                                    <div *ngIf="(title.dirty || title.touched) && title.errors?.['required']"
+                                        class="alert alert-danger">
+                                        Topic is required
+                                    </div>  
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <div class="form-group">
+                                    <label for="courseDesc"><b>Description</b></label>
+                                    <input type="text" class="form-control" [(ngModel)]="selectedCourse.description" name="description" 
+                                        #description="ngModel" placeholder="Enter description" required>
+                                    <div *ngIf="(description.dirty || description.touched) && description.errors?.['required']"
+                                        class="alert alert-danger">
+                                        Description is required
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <div class="form-group">
+                                    <label for="courseDuration"><b>Duration</b></label>
+                            <select class="form-control" ngModel name="duration" required #duration="ngModel" [(ngModel)]="selectedCourse.duration">
+                                <option *ngFor="let duration of durations" [value]="duration">{{ duration }}</option>
+                            </select>
+                            <div *ngIf="(duration.dirty || duration.touched) && duration.errors?.['required']"
+                                class="alert alert-danger">
+                                Duration is required
+                            </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <div class="form-group">
+                                    <label for="startDate"><b>Start Date</b></label>
+                                    <input type="date" class="form-control" ngModel name="startDate" required
+                                        #startDate="ngModel" [(ngModel)]="selectedCourse.startDate">
+                                    <div *ngIf="(startDate.dirty || startDate.touched) && startDate.errors?.['required']"
+                                        class="alert alert-danger">
+                                        Start date is required
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <div class="form-group">
+                                    <label for="endDate"><b>End Date</b></label>
+                            <input type="date" class="form-control" ngModel name="endDate" required
+                                #endDate="ngModel" [(ngModel)]="selectedCourse.endDate">
+                            <div *ngIf="(endDate.dirty || endDate.touched) && endDate.errors?.['required']"
+                                class="alert alert-danger">
+                                End date is required
+                            </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <div class="form-group">
+                                    <label for="instructornames"><b>Instructor</b></label>
+                            <select class="form-control" ngModel name="instructorname" required #instructorname="ngModel" [(ngModel)]="selectedCourse.instructorname">
+                                <option *ngFor="let instructorname of instructornames" [value]="instructorname">{{ instructorname }}</option>
+                            </select>
+                            <div *ngIf="(instructorname.dirty || instructorname.touched) && instructorname.errors?.['required']"
+                                class="alert alert-danger">
+                                Instructor is required
+                            </div>
+                                </div>
+                            </div>
+                            
+                            
+                            
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="closeModalBtn" class="btn btn-secondary"
+                            data-bs-dismiss="modal">Close</button>
+                        <button type="button" type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Modal END-->
+
+    
+
+
+    

@@ -1,0 +1,86 @@
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h1><i class="fa-solid fa-circle-plus"></i> Add New Course</h1>
+                </div>
+                <div class="card-body">
+                    <form #addCourseForm="ngForm" (ngSubmit)="onSubmit(addCourseForm)" [noValidate]="false">
+                        <div class="form-group">
+                            <label for="courseCode"><b>Course Code</b></label>
+                            <select class="form-control" ngModel name="coursecode" required #coursecode="ngModel">
+                                <option *ngFor="let coursecode of coursecodes" [value]="coursecode">{{ coursecode }}</option>
+                            </select>
+                            <div *ngIf="(coursecode.dirty || coursecode.touched) && coursecode.errors?.['required']"
+                                class="alert alert-danger">
+                                Course Code is required
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="courseTitle"><b>Topic</b></label>
+                            <select class="form-control" ngModel name="title" required #title="ngModel">
+                                <option *ngFor="let title of titles" [value]="title">{{ title }}</option>
+                            </select>
+                            <div *ngIf="(title.dirty || title.touched) && title.errors?.['required']"
+                                class="alert alert-danger">
+                                Topic is required
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="courseDesc"><b>Description</b></label>
+                            <input type="text" class="form-control" [(ngModel)]="course1.description" name="description" 
+                                #description="ngModel" placeholder="Enter description" required>
+                            <div *ngIf="(description.dirty || description.touched) && description.errors?.['required']"
+                                class="alert alert-danger">
+                                Description is required
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="courseDuration"><b>Duration</b></label>
+                            <select class="form-control" ngModel name="duration" required #duration="ngModel">
+                                <option *ngFor="let duration of durations" [value]="duration">{{ duration }}</option>
+                            </select>
+                            <div *ngIf="(duration.dirty || duration.touched) && duration.errors?.['required']"
+                                class="alert alert-danger">
+                                Duration is required
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="startDate"><b>Start Date</b></label>
+                            <input type="date" class="form-control" ngModel name="startDate" required
+                                #startDate="ngModel">
+                            <div *ngIf="(startDate.dirty || startDate.touched) && startDate.errors?.['required']"
+                                class="alert alert-danger">
+                                Start date is required
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="endDate"><b>End Date</b></label>
+                            <input type="date" class="form-control" ngModel name="endDate" required
+                                #endDate="ngModel">
+                            <div *ngIf="(endDate.dirty || endDate.touched) && endDate.errors?.['required']"
+                                class="alert alert-danger">
+                                End date is required
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="instructornames"><b>Instructor</b></label>
+                            <select class="form-control" ngModel name="instructorname" required #instructorname="ngModel">
+                                <option *ngFor="let instructorname of instructornames" [value]="instructorname">{{ instructorname }}</option>
+                            </select>
+                            <div *ngIf="(instructorname.dirty || instructorname.touched) && instructorname.errors?.['required']"
+                                class="alert alert-danger">
+                                Instructor is required
+                            </div>
+
+                        </div>
+                        <button type="submit" class="btn btn-outline-primary mt-3">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
